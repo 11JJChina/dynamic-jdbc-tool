@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhang.develop.mapper.HomePageMapper">
+
+    <resultMap id="BaseResultMap" type="com.zhang.develop.domain.StatisticsInfoDTO">
+        <result property="patientCount" column="patient_count" jdbcType="INTEGER"/>
+        <result property="legalIdcardCount" column="legal_idcard_count" jdbcType="INTEGER"/>
+        <result property="legalNameSexBirthCount" column="legal_name_sex_birth_count" jdbcType="INTEGER"/>
+        <result property="patientMainIndexCount" column="patient_main_index_count" jdbcType="INTEGER"/>
+        <result property="idcardCombineMainIndexCount" column="idcard_combine_main_index_count" jdbcType="INTEGER"/>
+        <result property="otherCombineMainIndexCount" column="other_combine_main_index_count" jdbcType="INTEGER"/>
+        <result property="createDate" column="create_date" jdbcType="VARCHAR"/>
+    </resultMap>
+
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAllCountData" resultMap="BaseResultMap">
+        select
+         patient_count, legal_idcard_count, legal_name_sex_birth_count, patient_main_index_count, idcard_combine_main_index_count, other_combine_main_index_count, create_date
+        from empi.statistics_info ORDER BY unix_timestamp(create_date) DESC LIMIT 1
+    </select>
+
+    <select id="queryAllCountData1" resultMap="BaseResultMap">
+        select
+            patient_count, legal_idcard_count, legal_name_sex_birth_count, patient_main_index_count, idcard_combine_main_index_count, other_combine_main_index_count, create_date
+        from empi.statistics_info where create_date='2021-06-30 16:15:29'
+    </select>
+
+
+</mapper>
